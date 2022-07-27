@@ -1,0 +1,50 @@
+第一个表格：DROP TABLE IF EXISTS 学院与楼栋
+第二个表格：DROP TABLE IF EXISTS 中间表
+第三个表格：DROP TABLE IF EXISTS 实验室表(详细)
+
+
+第一个表格：
+CREATE TABLE 学院与楼栋 (
+            楼栋id int primary key,
+            楼栋 VARCHAR(10) not null,
+            学院 VARCHAR(50) not null,
+            楼层总数 int
+            )engine=InnoDB,charset=utf8mb4
+
+第二个表格：
+CREATE TABLE 中间表 (
+            位置id int primary key,
+            具体楼层 int,
+            楼栋id int,
+            foreign key (楼栋id)REFERENCES 学院与楼栋(楼栋id)
+            )engine=InnoDB,charset=utf8mb4
+
+第三个表格：
+CREATE TABLE 实验室表 (
+            实验室id int primary key,
+            实验室位置 VARCHAR(10),
+            实验室名称 VARCHAR(25),
+            位置id int,
+            备注 VARCHAR(100),
+            foreign key (位置id)REFERENCES 中间表(位置id)
+            )engine=InnoDB,charset=utf8mb4
+
+
+第一个表格：
+f'insert into 学院与楼栋(楼栋id,楼栋,学院,楼层总数)/
+ values({value1},"{value2}","{value3}",{value4})'
+
+第二个表格：
+f'insert into 中间表(位置id,具体楼层,楼栋id)/
+ values({value1},{value2},{value3})'
+
+第三个表格：
+f'insert into 实验室表 (实验室id,实验室位置,实验室名称,位置id,备注)/
+ values({value1},"{value2}","{value3}",{value4},"{value5}")'
+
+
+
+
+第一个表格：select * from 学院与楼栋;
+第二个表格：select * from 中间表;
+第三个表格：select * from 实验室表;
